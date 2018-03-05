@@ -19,8 +19,15 @@ public class Player : MonoBehaviour {
 	void Update () {
         Debug.Log("Konnichiwa world");
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
-        rigidbody.velocity = Vector2.right * speed;
-        
+        //Number beteen -1 and 1 based uponplayer presing left or right/a or d
+        float horizontal = Input.GetAxis("Horizontal");
+        Debug.Log(horizontal);
+        Vector2 velocity = rigidbody.velocity;
+        velocity.x = horizontal*speed;
+      rigidbody.velocity= velocity;
+
+
+
     }
     public void ApplyDeath(float DammageDealt)
     {
