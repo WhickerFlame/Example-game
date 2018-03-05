@@ -24,16 +24,22 @@ public class Player : MonoBehaviour {
         float horizontal = Input.GetAxis("Horizontal");
         Debug.Log(horizontal);
 
-        //Boolean (true or false based or player pressing space bar
+        //Boolean (true or false) based or player pressing space bar
         bool jump = Input.GetButtonDown("Jump");
-        
+
+        //Find out if touching the ground
+        //get the collider component attached to this object
+        Collider2D collider = GetComponent<Collider2D>();
+        //Find out if we are coliding with the ground 
+        LayerMask GroundLayer = LayerMask.GetMask("Ground");
+        bool touchinGround = collider.IsTouchingLayers(GroundLayer);
         //caache a local copy of or rigidbody's velocity
         Vector2 velocity = rigidbody.velocity;
 
         //set the x (left/right/a/d) components of the velocty bsed on our input
         velocity.x = horizontal*speed;
         //set the y (up/down) component of the velocity based on jump
-        if (jump==true)
+        if (jump==true && touchinGround==true)
         {
             velocity.y = jumpspeed;
         }
